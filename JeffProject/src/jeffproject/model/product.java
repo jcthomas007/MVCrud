@@ -1,13 +1,12 @@
-package Controller;
+package jeffproject.model;
 import java.util.ArrayList;
-import Controller.Part
         ;
 /**
  *
  * @author jeffreyt
  */
-public abstract class Product {
-    private ArrayList<Part> associatedParts;
+public abstract class product {
+    private ArrayList<part> associatedParts;
     private int productID;
     private String name;
     private double price;
@@ -16,7 +15,7 @@ public abstract class Product {
     private int max;
     
     //Constructor
-    public Product( ArrayList<Part> associatedParts, int productID, String name, double price, int inStock, int min, int max ) {
+    public product( ArrayList<part> associatedParts, int productID, String name, double price, int inStock, int min, int max ) {
         this.setAssociatedParts( associatedParts );
         this.setProductID( productID );
         this.setName( name );
@@ -27,7 +26,7 @@ public abstract class Product {
     }
         
     //Get
-    public ArrayList<Part> getAssociatedParts() {
+    public ArrayList<part> getAssociatedParts() {
         return this.associatedParts;
     }
         
@@ -39,7 +38,7 @@ public abstract class Product {
         return this.name;
     }
 
-    public dobule getPrice() {
+    public double getPrice() {
         return this.price;
     }
 
@@ -56,31 +55,31 @@ public abstract class Product {
     }
     
     //Set
-    public ArrayList<Part> setAssociatedParts( ArrayList<Part> parts ) {
+    public void setAssociatedParts( ArrayList<part> parts ) {
         this.associatedParts = parts;
     }
 
-    public int setProductID( int productID) {
+    public void setProductID( int productID) {
         this.productID = productID;
     }
 
-    public String setName( string name ) {
+    public void setName( String name ) {
         this.name = name;
     }
 
-    public dobule setPrice( double price ) {
+    public void setPrice( double price ) {
         this.price = price;
     }
 
-    public int setInStock( int inStock) {
+    public void setInStock( int inStock) {
         this.inStock = inStock;
     }
 
-    public int setMin( int min ) {
+    public void setMin( int min ) {
         this.min = min;
     }
 
-    public int setMax( int max ) {
+    public void setMax( int max ) {
         this.max = max;
     }
 
