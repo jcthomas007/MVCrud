@@ -6,8 +6,9 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import searchtableview.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="469.0" prefWidth="1094.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main_Controller">
+<AnchorPane id="AnchorPane" prefHeight="469.0" prefWidth="1094.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeffproject.view_controller.main_Controller">
     <children>
         <Button fx:id="btnExit" layoutX="999.0" layoutY="421.0" onAction="#handleExit" prefHeight="27.0" prefWidth="69.0" text="Exit" />
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
@@ -27,7 +28,7 @@
             </TableView>
             <Button fx:id="btnPartDelete" layoutX="422.0" layoutY="316.0" mnemonicParsing="false" onAction="#handlePartDelete" text="Delete" />
             <Button fx:id="btnPartModify" layoutX="338.0" layoutY="316.0" mnemonicParsing="false" onAction="#handlePartModify" text="Modify" />
-            <Button fx:id="btnPartAdd" layoutX="254.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleProductAdd" text="Add" />
+            <Button fx:id="btnPartAdd" layoutX="254.0" layoutY="316.0" mnemonicParsing="false" onAction="#handlePartAdd" text="Add" />
          </children>
       </Pane>
       <Pane layoutX="564.0" layoutY="51.0" prefHeight="357.0" prefWidth="504.0" style="-fx-border-width: 1; -fx-border-color: black; -fx-border-radius: 10;">
