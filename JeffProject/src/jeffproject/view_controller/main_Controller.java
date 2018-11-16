@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -25,6 +26,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -89,11 +91,11 @@ public class main_Controller implements Initializable {
 
     @FXML
     private void handleExit(ActionEvent event) {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
+        Alert alert = new Alert(AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
         alert.setTitle("Confirm");
         alert.setContentText("Do you want to exit?");
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.YES){
             System.exit(1);
         }
     }
@@ -109,6 +111,9 @@ public class main_Controller implements Initializable {
             Parent root = (Parent) fxmlLoader.load();            
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.initModality(Modality.WINDOW_MODAL);
+                stage.initOwner(
+                ((Node)event.getSource()).getScene().getWindow() );
             stage.show();
         } catch (IOException e) {
             Logger logger = Logger.getLogger(getClass().getName());

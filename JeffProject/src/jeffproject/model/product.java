@@ -5,7 +5,7 @@ import java.util.ArrayList;
  *
  * @author jeffreyt
  */
-public abstract class product {
+public class product {
     private ArrayList<part> associatedParts;
     private int productID;
     private String name;

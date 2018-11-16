@@ -10,24 +10,16 @@ package jeffproject.model;
  * @author jeffreyt
  */
 public abstract class part {
+    int partID;
+    String name;
+    double price;
+    int inStock;
+    int min;
+    int max;
     
-    private int partID;
-    private String name;
-    private double price;
-    private int inStock;
-    private int min;
-    private int max;
-    
-    //Constructor
-    public part( int partID, String name, double price, int inStock, int min, int max ) {
-        this.setPartID( partID );
-        this.setName( name );
-        this.setPrice( price );
-        this.setInStock( inStock );
-        this.setMin( min );
-        this.setMax( max );
-    }
-        
+    public abstract addPart (int id, String name, double price, int inStock, int min, int max);
+    public abstract void removePart(int id);
+
     //Get
     public int getPartID() {
         return this.partID;
@@ -77,6 +69,5 @@ public abstract class part {
     public void setMax( int max ) {
         this.max = max;
     }
-
 
 }
