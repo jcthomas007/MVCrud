@@ -6,7 +6,6 @@ import java.util.ArrayList;
  * @author jeffreyt
  */
 public class product {
-    private ArrayList<part> associatedParts;
     private int productID;
     private String name;
     private double price;
@@ -15,19 +14,13 @@ public class product {
     private int max;
     
     //Constructor
-    public product( ArrayList<part> associatedParts, int productID, String name, double price, int inStock, int min, int max ) {
-        this.setAssociatedParts( associatedParts );
-        this.setProductID( productID );
-        this.setName( name );
-        this.setPrice( price );
-        this.setInStock( inStock );
-        this.setMin( min );
-        this.setMax( max );
-    }
-        
-    //Get
-    public ArrayList<part> getAssociatedParts() {
-        return this.associatedParts;
+    public product() {
+    productID = 0;
+    name = "";
+    price = 0;
+    inStock = 0;
+    min = 0;
+    max = 0;
     }
         
     public int getProductID() {
@@ -55,10 +48,6 @@ public class product {
     }
     
     //Set
-    public void setAssociatedParts( ArrayList<part> parts ) {
-        this.associatedParts = parts;
-    }
-
     public void setProductID( int productID) {
         this.productID = productID;
     }

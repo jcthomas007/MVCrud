@@ -1,73 +1,92 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
  */
 package jeffproject.model;
+
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  *
  * @author jeffreyt
  */
 public abstract class part {
-    int partID;
-    String name;
-    double price;
-    int inStock;
-    int min;
-    int max;
+    private IntegerProperty partId;
+    private StringProperty name;
+    private DoubleProperty price;
+    private IntegerProperty inv;
+    private IntegerProperty min;
+    private IntegerProperty max;
+    private StringProperty company;
     
-    public abstract addPart (int id, String name, double price, int inStock, int min, int max);
-    public abstract void removePart(int id);
-
+    public part(){
+        partId = new SimpleIntegerProperty();
+        name = new SimpleStringProperty();
+        price = new SimpleDoubleProperty();
+        inv = new SimpleIntegerProperty();
+        min = new SimpleIntegerProperty();
+        max = new SimpleIntegerProperty();
+        company = new SimpleStringProperty();
+    }
+    
     //Get
-    public int getPartID() {
-        return this.partID;
+    public IntegerProperty getPartId() {
+        return this.partId;
     }
 
-    public String getName() {
+    public StringProperty getName() {
         return this.name;
     }
 
-    public double getPrice() {
+    public DoubleProperty getPrice() {
         return this.price;
     }
 
-    public int getInStock() {
-        return this.inStock;
+    public IntegerProperty getInv() {
+        return this.inv;
     }
 
-    public int getMin() {
+    public IntegerProperty getMin() {
         return this.min;
     }
 
-    public int getMax() {
+    public IntegerProperty getMax() {
         return this.max;
     }
     
+    public StringProperty getCompany() {
+        return this.company;
+    }
+    
     //Set
-    public void setPartID( int partID) {
-        this.partID = partID;
+    public void setPartId( int partId) {
+        this.partId.set(partId);
     }
 
     public void setName( String name ) {
-        this.name = name;
+        this.name.set(name);
     }
 
     public void setPrice( double price ) {
-        this.price = price;
+        this.price.set(price);
     }
 
-    public void setInStock( int inStock) {
-        this.inStock = inStock;
+    public void setInv( int inv) {
+        this.inv.set(inv);
     }
 
     public void setMin( int min ) {
-        this.min = min;
+        this.min.set(min);
     }
 
     public void setMax( int max ) {
-        this.max = max;
+        this.max.set(max);
     }
-
+    
+    public void setCompany( String company ) {
+        this.company.set(company);
+    }
 }

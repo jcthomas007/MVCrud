@@ -6,7 +6,6 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import searchtableview.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="469.0" prefWidth="1094.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeffproject.view_controller.main_Controller">
     <children>

@@ -19,7 +19,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
-import jeffproject.model.part;
+import jeffproject.model.partInHouse;
+import jeffproject.model.partOutSourced;
+import jeffproject.model.inventory;
 
 /**
  * FXML Controller class
@@ -55,12 +57,7 @@ public class addPart_Controller implements Initializable {
     @FXML
     private TextField txtMax;
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-    }
+    private boolean bOutsourced = false;
 
     @FXML
     private void cancelHandler(ActionEvent event) {
@@ -76,28 +73,53 @@ public class addPart_Controller implements Initializable {
 
     @FXML
     private void saveHandler(ActionEvent event) {
-        inHousePart savePart = new inHousePart();
-        savePart.add();
+        String partId = txtID.getText();
+        String name = txtName.getText();
+        String min = txtMin.getText();
+        String company = txtCompanyName.getText();
+        String price = txtPrice.getText();
+        String inv = txtInv.getText();
+        String max = txtMax.getText();
 
+        //validator here
+        if (bOutsourced == false) {
+            partOutSourced newPart = new partOutSourced();
+            newPart.setPartId(Integer.parseInt(partId));
+            newPart.setName(name);
+            newPart.setMax(Integer.parseInt(max));
+            newPart.setMin(Integer.parseInt(min));
+            newPart.setInv(Integer.parseInt(inv));
+            newPart.setPrice(Double.parseDouble(price));
+            newPart.setCompany(company);
+            inventory.partAdd(newPart);
+        } else {
+            partInHouse newPart = new partInHouse();
+            newPart.setPartId(Integer.parseInt(partId));
+            newPart.setName(name);
+            newPart.setMax(Integer.parseInt(max));
+            newPart.setMin(Integer.parseInt(min));
+            newPart.setInv(Integer.parseInt(inv));
+            newPart.setPrice(Double.parseDouble(price));
+            newPart.setCompany(company);
+            inventory.partAdd(newPart);
+        }
         Stage stage = (Stage) btnSave.getScene().getWindow();
         stage.close();
     }
 
     @FXML
     private void inHouseHandler(ActionEvent event) {
+        bOutsourced = false;
+        rbtnOutsourced.setSelected(false);
     }
 
     @FXML
     private void outsourcedHandler(ActionEvent event) {
+        bOutsourced = true;
+        rbtnInHouse.setSelected(false);
     }
 
-    public class inHousePart extends part {
-//        public addPart (int id){
-//            return 1;
-//        }
-        
-        public removePart void(int id){
-
-        }    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
     }
 }
