@@ -66,7 +66,7 @@ public class main_Controller implements Initializable {
     @FXML
     private TextField txtProductSearch;
     @FXML
-    private TableView<?> grdProduct;
+    private TableView<product> grdProduct;
     @FXML
     private TableColumn<product, Integer> colProductID;
     @FXML
@@ -74,7 +74,7 @@ public class main_Controller implements Initializable {
     @FXML
     private TableColumn<product, Integer> colProductInventoryLevel;
     @FXML
-    private TableColumn<product, Integer> colProductPrice;
+    private TableColumn<product, Double> colProductPrice;
     @FXML
     private Button btnProductDelete;
     @FXML
@@ -93,57 +93,39 @@ public class main_Controller implements Initializable {
         colPartID.setCellValueFactory(cellData -> cellData.getValue().getPartId().asObject());
         colPartInventoryLevel.setCellValueFactory(cellData -> cellData.getValue().getInv().asObject());
         grdPart.setItems(inventory.getParts());
-    }    
+        
+        colProductID.setCellValueFactory(cellData -> cellData.getValue().getProductID().asObject());
+        colProductName.setCellValueFactory(cellData -> cellData.getValue().getName());
+        colProductInventoryLevel.setCellValueFactory(cellData -> cellData.getValue().getInStock().asObject());
+        colProductPrice.setCellValueFactory(cellData -> cellData.getValue().getPrice().asObject());
+        grdProduct.setItems(inventory.getProducts());
+    }
 
     @FXML
     private void handleExit(ActionEvent event) {
-        Alert alert = new Alert(AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
-        alert.setTitle("Confirm");
-        alert.setContentText("Do you want to exit?");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.YES){
+        if (openConfirm("Do you want to exit?") == true) {
             System.exit(1);
         }
     }
 
     @FXML
-    private void handleSearch(ActionEvent event) {
-    }
-
-    @FXML
     private void handlePartAdd(ActionEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addPart.fxml"));
-            Parent root = (Parent) fxmlLoader.load();            
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            Logger logger = Logger.getLogger(getClass().getName());
-            logger.log(Level.SEVERE, "Failed to create new Window.", e);
-        }
-    }
-    
-    @FXML
-    private void handlePartDelete(ActionEvent event) {
+        openScreen("addPart.fxml");
     }
 
     @FXML
     private void handlePartModify(ActionEvent event) {
+        openScreen("modifyPart.fxml");
     }
 
     @FXML
     private void handleProductAdd(ActionEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("addProduct.fxml"));
-            Parent root = (Parent) fxmlLoader.load();            
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            Logger logger = Logger.getLogger(getClass().getName());
-            logger.log(Level.SEVERE, "Failed to create new Window.", e);
-        }
+        openScreen("addProduct.fxml");
+    }
+
+    @FXML
+    private void handleProductModify(ActionEvent event) {
+        openScreen("modifyProduct.fxml");
     }
 
     @FXML
@@ -151,11 +133,41 @@ public class main_Controller implements Initializable {
     }
 
     @FXML
-    private void handleProductDelete(ActionEvent event) {
+    private void handleSearch(ActionEvent event) {
     }
 
     @FXML
-    private void handleProductModify(ActionEvent event) {
+    private void handlePartDelete(ActionEvent event) {
+        // confirm deletion
+        if (openConfirm("Do you want to delete this part?") == true) {
+            part part = grdPart.getSelectionModel().getSelectedItem();
+            inventory.deletePart(part);
+            grdPart.setItems(inventory.getParts());
+        }
     }
-    
+
+    @FXML
+    private void handleProductDelete(ActionEvent event) {
+    }
+
+    private void openScreen(String name) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(name));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            Logger logger = Logger.getLogger(getClass().getName());
+            logger.log(Level.SEVERE, "Failed to create new Window.", e);
+        }
+    }
+
+    public static boolean openConfirm(String prompt) {
+        Alert alert = new Alert(AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
+        alert.setTitle("Confirm");
+        alert.setContentText(prompt);
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.get() == ButtonType.YES;
+    }
 }

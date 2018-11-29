@@ -6,7 +6,6 @@
 package jeffproject.view_controller;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,8 +17,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import jeffproject.model.inventory;
 import jeffproject.model.part;
 import jeffproject.model.product;
+import static jeffproject.view_controller.main_Controller.openConfirm;
 
 /**
  * FXML Controller class
@@ -35,25 +37,25 @@ public class addProduct_Controller implements Initializable {
     @FXML
     private Label label;
     @FXML
-    private TableView<product> grdFindProduct;
+    private TableView<part> grdFindProduct;
     @FXML
-    private TableColumn<?, ?> colFindPartID;
+    private TableColumn<part, Integer> colFindPartID;
     @FXML
-    private TableColumn<?, ?> colFindPartName;
+    private TableColumn<part, String> colFindPartName;
     @FXML
-    private TableColumn<?, ?> colFindInventoryLevel;
+    private TableColumn<part, Integer> colFindInventoryLevel;
     @FXML
-    private TableColumn<?, ?> colFindPricePerUnit;
+    private TableColumn<part, Double> colFindPricePerUnit;
     @FXML
-    private TableView<product> grdEditProduct;
+    private TableView<part> grdFindProduct1;
     @FXML
-    private TableColumn<?, ?> colEditPartID;
+    private TableColumn<part, Integer> colFindPartID1;
     @FXML
-    private TableColumn<?, ?> colEditPartName;
+    private TableColumn<part, String> colFindPartName1;
     @FXML
-    private TableColumn<?, ?> colEditInventoryLevel;
+    private TableColumn<part, Integer> colFindInventoryLevel1;
     @FXML
-    private TableColumn<?, ?> colEditPricePerUnit;
+    private TableColumn<part, Double> colFindPricePerUnit1;
     @FXML
     private Button txtSave;
     @FXML
@@ -72,72 +74,78 @@ public class addProduct_Controller implements Initializable {
     private TextField txtName;
     @FXML
     private TextField txtID;
-    
-    private ObservableList<product> dataProductSearch=FXCollections.observableArrayList();
-    private ObservableList<product> dataProductEdit=FXCollections.observableArrayList();
-    
+
+    private static ObservableList<part> partStock = FXCollections.observableArrayList();
+    private int productID;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    }    
-
-    @FXML
-    private void handleDelete(ActionEvent event) {
-    }
-
-    @FXML
-    private void handleSave(ActionEvent event) {
-    }
-
-    @FXML
-    private void handleCancel(ActionEvent event) {
+        colFindPartID.setCellValueFactory(cellData -> cellData.getValue().getPartId().asObject());
+        colFindPartName.setCellValueFactory(cellData -> cellData.getValue().getName());
+        colFindPricePerUnit.setCellValueFactory(cellData -> cellData.getValue().getPrice().asObject());
+        colFindInventoryLevel.setCellValueFactory(cellData -> cellData.getValue().getInv().asObject());
+        grdFindProduct.setItems(inventory.getParts());
     }
 
     @FXML
     private void handleAdd(ActionEvent event) {
-//        dataProductSearch = grdEditProduct.getItems();
-//        newPart part(1,2,3,4,5);
-//        
-//        ArrayList<Integer> parts = new ArrayList<>(newPart);
-//        dataProductSearch.add(new product(parts,2,3,4,5,6,7));
-//        
-//        
-////        product newProduct = product();
-//        newProduct.setInStock(0);
-//        newProduct.setMax(01);
-//        newProduct.setMin(2);
-//        newProduct.setName("test");
-//        newProduct.setPrice(3);
-//        newProduct.setProductID(04);
-//        tblItems.add(newProduct);
+        part part = grdFindProduct.getSelectionModel().getSelectedItem();
+        partStock.add(part);
+        updateProductPart();
     }
 
     @FXML
-    private void handleSearch(ActionEvent event) {
-//        String searchItem=txtSearch.getText();
-//        boolean found=false;
-//        
-//        for (part p : dataPartSearch) {
-//            if(Integer.toString(p.getPartID()).equels(searchItem) || p.getName().contains(searchItem)) {
-//                system.out.println("This is part " + searchItem);
-//                found=true;
-//            }
-// 
-//        }
+    private void handleDelete(ActionEvent event) {
+        if (openConfirm("Do you want to remove this part?") == true) {
+            part part = grdFindProduct1.getSelectionModel().getSelectedItem();
+            partStock.remove(part);
+            updateProductPart();
+        }
     }
-    
-//    public inHouse extends part {
-//        void add(){
-//            part.a
-//        }
-//    }
-//    
-//    public outSourced extends part {
-//        void add(){
-//            part.a
-//        }
-//    }
-    
+
+    @FXML
+    private void handleSave(ActionEvent event) {
+
+        product newProd = new product();
+        newProd.setMax(Integer.parseInt(txtMax.getText()));
+        newProd.setInStock(Integer.parseInt(txtInv.getText()));
+        newProd.setPrice(Double.parseDouble(txtPrice.getText()));
+        newProd.setMin(Integer.parseInt(txtMin.getText()));
+        newProd.setName(txtName.getText());
+        newProd.setProductID(Integer.parseInt(txtID.getText()));
+        newProd.setParts(partStock);
+        inventory.productAdd(newProd);
+
+        Stage stage = (Stage) txtSave.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void handleCancel(ActionEvent event
+    ) {
+        if (openConfirm("Do you want to exit without saving?") == true) {
+            Stage stage = (Stage) txtSave.getScene().getWindow();
+            stage.close();
+        }
+    }
+
+    @FXML
+    private void handleSearch(ActionEvent event
+    ) {
+
+    }
+
+    private void updateProductPart() {
+        colFindPartID1.setCellValueFactory(cellData -> cellData.getValue().getPartId().asObject());
+        colFindPartName1.setCellValueFactory(cellData -> cellData.getValue().getName());
+        colFindPricePerUnit1.setCellValueFactory(cellData -> cellData.getValue().getPrice().asObject());
+        colFindInventoryLevel1.setCellValueFactory(cellData -> cellData.getValue().getInv().asObject());
+        if (partStock.size() > 0) {
+            grdFindProduct1.setItems(partStock);
+        }
+    }
+
 }

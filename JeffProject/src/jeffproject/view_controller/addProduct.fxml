@@ -11,6 +11,14 @@
          <children>
             <Label layoutX="14.0" layoutY="32.0" text="Add Product" textFill="#136cbf" />
             <TextField fx:id="txtSearch" layoutX="633.0" layoutY="74.0" prefHeight="27.0" prefWidth="251.0" />
+            <TableView fx:id="grdFindProduct1" layoutX="414.0" layoutY="388.0" prefHeight="200.0" prefWidth="470.0">
+               <columns>
+                  <TableColumn fx:id="colFindPartID1" prefWidth="75.0" text="Part ID" />
+                  <TableColumn fx:id="colFindPartName1" prefWidth="75.0" text="Part Name" />
+                  <TableColumn fx:id="colFindInventoryLevel1" prefWidth="75.0" text="Inventory Level" />
+                  <TableColumn fx:id="colFindPricePerUnit1" prefWidth="75.0" text="Price Per Unit" />
+               </columns>
+            </TableView>
          </children>
       </Pane>
       <Button fx:id="txtDelete" layoutX="829.0" layoutY="645.0" onAction="#handleDelete" prefHeight="27.0" prefWidth="69.0" text="Delete" />
@@ -21,14 +29,6 @@
             <TableColumn fx:id="colFindPartName" prefWidth="75.0" text="Part Name" />
             <TableColumn fx:id="colFindInventoryLevel" prefWidth="75.0" text="Inventory Level" />
             <TableColumn fx:id="colFindPricePerUnit" prefWidth="75.0" text="Price Per Unit" />
-         </columns>
-      </TableView>
-      <TableView fx:id="grdEditPart" layoutX="428.0" layoutY="428.0" prefHeight="200.0" prefWidth="470.0">
-         <columns>
-            <TableColumn fx:id="colEditPartID" prefWidth="75.0" text="Part ID" />
-            <TableColumn fx:id="colEditPartName" prefWidth="75.0" text="Part Name" />
-            <TableColumn fx:id="colEditInventoryLevel" prefWidth="75.0" text="Inventory Level" />
-            <TableColumn fx:id="colEditPricePerUnit" prefWidth="75.0" text="PricePerUnit" />
          </columns>
       </TableView>
       <Button fx:id="txtSave" layoutX="746.0" layoutY="681.0" onAction="#handleSave" prefHeight="27.0" prefWidth="69.0" text="Save" />
