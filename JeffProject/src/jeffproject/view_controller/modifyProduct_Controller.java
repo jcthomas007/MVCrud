@@ -15,6 +15,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import static jeffproject.view_controller.main_Controller.openConfirm;
 
 /**
  * FXML Controller class
@@ -76,10 +78,14 @@ public class modifyProduct_Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
+        if (openConfirm("Do you want to exit without saving?") == true) {
+            Stage stage = (Stage) btnCancel.getScene().getWindow();
+            stage.close();
+        }
     }
 
     @FXML
@@ -89,5 +95,5 @@ public class modifyProduct_Controller implements Initializable {
     @FXML
     private void handleSearch(ActionEvent event) {
     }
-    
+
 }

@@ -82,6 +82,9 @@ public class main_Controller implements Initializable {
     @FXML
     private Button btnProductAdd;
 
+    public static int partId;
+    public static int productId;
+
     /**
      * Initializes the controller class.
      */
@@ -90,10 +93,9 @@ public class main_Controller implements Initializable {
         colPartID.setCellValueFactory(cellData -> cellData.getValue().getPartId().asObject());
         colPartName.setCellValueFactory(cellData -> cellData.getValue().getName());
         colPartPrice.setCellValueFactory(cellData -> cellData.getValue().getPrice().asObject());
-        colPartID.setCellValueFactory(cellData -> cellData.getValue().getPartId().asObject());
         colPartInventoryLevel.setCellValueFactory(cellData -> cellData.getValue().getInv().asObject());
         grdPart.setItems(inventory.getParts());
-        
+
         colProductID.setCellValueFactory(cellData -> cellData.getValue().getProductID().asObject());
         colProductName.setCellValueFactory(cellData -> cellData.getValue().getName());
         colProductInventoryLevel.setCellValueFactory(cellData -> cellData.getValue().getInStock().asObject());
@@ -115,7 +117,15 @@ public class main_Controller implements Initializable {
 
     @FXML
     private void handlePartModify(ActionEvent event) {
-        openScreen("modifyPart.fxml");
+        if (grdPart.getSelectionModel().isEmpty() == false) {
+            partId = grdPart.getSelectionModel().getSelectedIndex();
+            openScreen("modifyPart.fxml");
+        } else {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("Please select a Part to modify");
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -125,7 +135,15 @@ public class main_Controller implements Initializable {
 
     @FXML
     private void handleProductModify(ActionEvent event) {
-        openScreen("modifyProduct.fxml");
+        if (grdProduct.getSelectionModel().isEmpty() == false) {
+            productId = grdProduct.getSelectionModel().getSelectedIndex();
+            openScreen("modifyProduct.fxml");
+        } else {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText("Please select a Product to modify");
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -138,16 +156,24 @@ public class main_Controller implements Initializable {
 
     @FXML
     private void handlePartDelete(ActionEvent event) {
-        // confirm deletion
-        if (openConfirm("Do you want to delete this part?") == true) {
-            part part = grdPart.getSelectionModel().getSelectedItem();
-            inventory.deletePart(part);
-            grdPart.setItems(inventory.getParts());
+        if (grdPart.getSelectionModel().isEmpty() == false) {
+            if (openConfirm("Do you want to delete this part?") == true) {
+                part part = grdPart.getSelectionModel().getSelectedItem();
+                inventory.deletePart(part);
+                grdPart.setItems(inventory.getParts());
+            }
         }
     }
 
     @FXML
     private void handleProductDelete(ActionEvent event) {
+        if (grdProduct.getSelectionModel().isEmpty() == false) {
+            if (openConfirm("Do you want to delete this product?") == true) {
+                product product = grdProduct.getSelectionModel().getSelectedItem();
+                inventory.deleteProduct(product);
+                grdProduct.setItems(inventory.getProducts());
+            }
+        }
     }
 
     private void openScreen(String name) {
@@ -170,4 +196,5 @@ public class main_Controller implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         return result.get() == ButtonType.YES;
     }
+
 }

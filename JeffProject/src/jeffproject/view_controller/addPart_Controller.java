@@ -22,6 +22,8 @@ import javafx.stage.Stage;
 import jeffproject.model.partInHouse;
 import jeffproject.model.partOutSourced;
 import jeffproject.model.inventory;
+import jeffproject.model.part;
+import static jeffproject.view_controller.main_Controller.openConfirm;
 
 /**
  * FXML Controller class
@@ -61,11 +63,7 @@ public class addPart_Controller implements Initializable {
 
     @FXML
     private void cancelHandler(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
-        alert.setTitle("Confirm");
-        alert.setContentText("Do you want to leave this screen?");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.YES) {
+        if (openConfirm("Do you want to exit without saving?") == true) {
             Stage stage = (Stage) btnCancel.getScene().getWindow();
             stage.close();
         }

@@ -49,7 +49,7 @@ public class inventory {
         productStock.add(product);
     }
 
-    public static void deleteproduct(product product) {
+    public static void deleteProduct(product product) {
         productStock.remove(product);
     }
     
