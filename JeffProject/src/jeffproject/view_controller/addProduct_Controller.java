@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -135,10 +136,19 @@ public class addProduct_Controller implements Initializable {
     @FXML
     private void handleSearch(ActionEvent event
     ) {
-
+        Integer iIndex = inventory.productLookup(txtSearch.getText());
+        if (iIndex > -1) {
+            grdFindProduct.requestFocus();
+            grdFindProduct.getSelectionModel().select(iIndex);
+            grdFindProduct.getFocusModel().focus(iIndex);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("No Product found");
+            alert.showAndWait();
+        }
     }
 
-    private void updateProductPart() {
+private void updateProductPart() {
         colFindPartID1.setCellValueFactory(cellData -> cellData.getValue().getPartId().asObject());
         colFindPartName1.setCellValueFactory(cellData -> cellData.getValue().getName());
         colFindPricePerUnit1.setCellValueFactory(cellData -> cellData.getValue().getPrice().asObject());

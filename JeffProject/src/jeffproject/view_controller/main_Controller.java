@@ -148,10 +148,30 @@ public class main_Controller implements Initializable {
 
     @FXML
     private void handleProductSearch(ActionEvent event) {
+        Integer iIndex = inventory.productLookup(txtProductSearch.getText());
+        if (iIndex > -1) {
+            grdProduct.requestFocus();
+            grdProduct.getSelectionModel().select(iIndex);
+            grdProduct.getFocusModel().focus(iIndex);
+        } else {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setContentText("No Product found");
+            alert.showAndWait();
+        }
     }
 
     @FXML
     private void handleSearch(ActionEvent event) {
+        Integer iIndex = inventory.partLookup(txtPartSearch.getText());
+        if (iIndex > -1) {
+            grdPart.requestFocus();
+            grdPart.getSelectionModel().select(iIndex);
+            grdPart.getFocusModel().focus(iIndex);
+        } else {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setContentText("No Part found");
+            alert.showAndWait();
+        }
     }
 
     @FXML

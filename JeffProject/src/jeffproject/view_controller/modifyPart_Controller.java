@@ -6,13 +6,10 @@
 package jeffproject.view_controller;
 
 import java.net.URL;
-import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -71,11 +68,11 @@ public class modifyPart_Controller implements Initializable {
         //rdoOutsourced;
         txtID.setText((Integer.toString(partEdit.getPartId().getValue())));
         txtName.setText(partEdit.getName().getValue());
-        txtMin.setText(Integer.toString(partEdit.getPartId().getValue()));
-        txtCompanyName.setText(Integer.toString(partEdit.getPartId().getValue()));
-        txtPrice.setText(Double.toString(partEdit.getPartId().getValue()));
-        txtInv.setText(Integer.toString(partEdit.getPartId().getValue()));
-        txtMax.setText(Integer.toString(partEdit.getPartId().getValue()));
+        txtMin.setText(Integer.toString(partEdit.getMin().getValue()));
+        txtCompanyName.setText(partEdit.getCompany().getValue());
+        txtPrice.setText(Double.toString(partEdit.getPrice().getValue()));
+        txtInv.setText(Integer.toString(partEdit.getInv().getValue()));
+        txtMax.setText(Integer.toString(partEdit.getMax().getValue()));
     }
 
     @FXML

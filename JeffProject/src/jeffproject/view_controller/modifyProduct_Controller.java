@@ -7,15 +7,21 @@ package jeffproject.view_controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import jeffproject.model.inventory;
+import jeffproject.model.part;
+import jeffproject.model.product;
 import static jeffproject.view_controller.main_Controller.openConfirm;
 
 /**
@@ -32,25 +38,25 @@ public class modifyProduct_Controller implements Initializable {
     @FXML
     private Label label;
     @FXML
-    private TableView<?> grdSearch;
+    private TableView<part> grdSearch;
     @FXML
-    private TableColumn<?, ?> colSearchPartID;
+    private TableColumn<part, Integer> colSearchPartID;
     @FXML
-    private TableColumn<?, ?> colSearchName;
+    private TableColumn<part, String> colSearchName;
     @FXML
-    private TableColumn<?, ?> colSearchInventory;
+    private TableColumn<part, Integer> colSearchInventory;
     @FXML
-    private TableColumn<?, ?> colSearchPrice;
+    private TableColumn<part, Double> colSearchPrice;
     @FXML
-    private TableView<?> grdEdit;
+    private TableView<part> grdEdit;
     @FXML
-    private TableColumn<?, ?> colEditPartID;
+    private TableColumn<part, Integer> colEditPartID;
     @FXML
-    private TableColumn<?, ?> colEditName;
+    private TableColumn<part, String> colEditName;
     @FXML
-    private TableColumn<?, ?> colEditInventory;
+    private TableColumn<part, Integer> colEditInventory;
     @FXML
-    private TableColumn<?, ?> colEditPrice;
+    private TableColumn<part, Double> colEditPrice;
     @FXML
     private Button btnSave;
     @FXML
@@ -72,12 +78,26 @@ public class modifyProduct_Controller implements Initializable {
     @FXML
     private TextField txtID;
 
+    private static ObservableList<part> productParts = FXCollections.observableArrayList();
+    private static ObservableList<part> allParts = FXCollections.observableArrayList();
+    private product productEdit;
+    private Integer productIndex;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        productIndex = main_Controller.productId;
+        productEdit = inventory.getProducts().get(productIndex);
+        txtID.setText((Integer.toString(productEdit.getProductID().getValue())));
+        txtName.setText(productEdit.getName().getValue());
+        txtMax.setText((Integer.toString(productEdit.getMax().getValue())));
+        txtInv.setText((Integer.toString(productEdit.getInStock().getValue())));
+        txtPrice.setText((Double.toString(productEdit.getPrice().getValue())));
+        txtMin.setText((Integer.toString(productEdit.getMin().getValue())));
+        updateGrids();
+
     }
 
     @FXML
@@ -89,11 +109,62 @@ public class modifyProduct_Controller implements Initializable {
     }
 
     @FXML
-    private void handleAdd(ActionEvent event) {
+    private void handleDeleteAction(ActionEvent event) {
+        part part = grdEdit.getSelectionModel().getSelectedItem();
+        productParts.remove(part);
+        updateGrids();
     }
 
     @FXML
-    private void handleSearch(ActionEvent event) {
+    private void handleAdd(ActionEvent event) {
+        part part = grdSearch.getSelectionModel().getSelectedItem();
+        productParts.add(part);
+        updateGrids();
+    }
+
+    @FXML
+    private void handleSaveAction(ActionEvent event) {
+        productEdit.setProductID(Integer.parseInt(txtID.getText()));
+        productEdit.setName(txtName.getText());
+        productEdit.setMin(Integer.parseInt(txtMin.getText()));
+        productEdit.setPrice(Double.parseDouble(txtPrice.getText()));
+        productEdit.setInStock(Integer.parseInt(txtInv.getText()));
+        productEdit.setMax(Integer.parseInt(txtMax.getText()));
+
+        inventory.updatePart(productIndex, productEdit);
+        Stage stage = (Stage) btnSave.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void handleSearch(ActionEvent event
+    ) {
+        Integer iIndex = inventory.productLookup(txtSearch.getText());
+        if (iIndex > -1) {
+            grdSearch.requestFocus();
+            grdSearch.getSelectionModel().select(iIndex);
+            grdSearch.getFocusModel().focus(iIndex);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("No Product found");
+            alert.showAndWait();
+        }
+    }
+
+    private void updateGrids() {
+        productParts = productEdit.getParts();
+        colEditPartID.setCellValueFactory(cellData -> cellData.getValue().getPartId().asObject());
+        colEditName.setCellValueFactory(cellData -> cellData.getValue().getName());
+        colEditInventory.setCellValueFactory(cellData -> cellData.getValue().getInv().asObject());
+        colEditPrice.setCellValueFactory(cellData -> cellData.getValue().getPrice().asObject());
+        grdEdit.setItems(productParts);
+
+        allParts = inventory.getParts();
+        colSearchPartID.setCellValueFactory(cellData -> cellData.getValue().getPartId().asObject());
+        colSearchName.setCellValueFactory(cellData -> cellData.getValue().getName());
+        colSearchInventory.setCellValueFactory(cellData -> cellData.getValue().getInv().asObject());
+        colSearchPrice.setCellValueFactory(cellData -> cellData.getValue().getPrice().asObject());
+        grdSearch.setItems(allParts);
     }
 
 }
