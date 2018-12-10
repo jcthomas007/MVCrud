@@ -79,30 +79,38 @@ public class addPart_Controller implements Initializable {
         String inv = txtInv.getText();
         String max = txtMax.getText();
 
-        //validator here
-        if (bOutsourced == false) {
-            partOutSourced newPart = new partOutSourced();
-            newPart.setPartId(Integer.parseInt(partId));
-            newPart.setName(name);
-            newPart.setMax(Integer.parseInt(max));
-            newPart.setMin(Integer.parseInt(min));
-            newPart.setInv(Integer.parseInt(inv));
-            newPart.setPrice(Double.parseDouble(price));
-            newPart.setCompany(company);
-            inventory.partAdd(newPart);
+        //validate new part
+        String message = inventory.isPartValid(name, price, inv, min, max, company);
+        if (message.length() == 0) {
+            if (bOutsourced == false) {
+                partOutSourced newPart = new partOutSourced();
+                newPart.setPartId(Integer.parseInt(partId));
+                newPart.setName(name);
+                newPart.setMax(Integer.parseInt(max));
+                newPart.setMin(Integer.parseInt(min));
+                newPart.setInv(Integer.parseInt(inv));
+                newPart.setPrice(Double.parseDouble(price));
+                newPart.setCompany(company);
+                inventory.partAdd(newPart);
+            } else {
+                partInHouse newPart = new partInHouse();
+                newPart.setPartId(Integer.parseInt(partId));
+                newPart.setName(name);
+                newPart.setMax(Integer.parseInt(max));
+                newPart.setMin(Integer.parseInt(min));
+                newPart.setInv(Integer.parseInt(inv));
+                newPart.setPrice(Double.parseDouble(price));
+                newPart.setCompany(company);
+                inventory.partAdd(newPart);
+            }
+            Stage stage = (Stage) btnSave.getScene().getWindow();
+            stage.close();
         } else {
-            partInHouse newPart = new partInHouse();
-            newPart.setPartId(Integer.parseInt(partId));
-            newPart.setName(name);
-            newPart.setMax(Integer.parseInt(max));
-            newPart.setMin(Integer.parseInt(min));
-            newPart.setInv(Integer.parseInt(inv));
-            newPart.setPrice(Double.parseDouble(price));
-            newPart.setCompany(company);
-            inventory.partAdd(newPart);
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText(message);
+            alert.showAndWait();
         }
-        Stage stage = (Stage) btnSave.getScene().getWindow();
-        stage.close();
     }
 
     @FXML

@@ -124,6 +124,10 @@ public class modifyProduct_Controller implements Initializable {
 
     @FXML
     private void handleSaveAction(ActionEvent event) {
+        
+        //        todo update per modifyPart_controller
+        
+        
         productEdit.setProductID(Integer.parseInt(txtID.getText()));
         productEdit.setName(txtName.getText());
         productEdit.setMin(Integer.parseInt(txtMin.getText()));

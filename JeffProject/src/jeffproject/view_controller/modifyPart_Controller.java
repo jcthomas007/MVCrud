@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -18,6 +19,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import jeffproject.model.inventory;
 import jeffproject.model.part;
+import jeffproject.model.partInHouse;
+import jeffproject.model.partOutSourced;
 import static jeffproject.view_controller.main_Controller.*;
 
 /**
@@ -56,6 +59,7 @@ public class modifyPart_Controller implements Initializable {
 
     private part partEdit;
     private Integer partIndex;
+    private boolean bOutsourced = false;
 
     /**
      * Initializes the controller class.
@@ -85,24 +89,59 @@ public class modifyPart_Controller implements Initializable {
 
     @FXML
     private void handleSave(ActionEvent event) {
-        partEdit.setPartId(Integer.parseInt(txtID.getText()));
-        partEdit.setName(txtName.getText());
-        partEdit.setMin(Integer.parseInt(txtMin.getText()));
-        partEdit.setCompany(txtCompanyName.getText());
-        partEdit.setPrice(Double.parseDouble(txtPrice.getText()));
-        partEdit.setInv(Integer.parseInt(txtInv.getText()));
-        partEdit.setMax(Integer.parseInt(txtMax.getText()));
-        inventory.updatePart(partIndex, partEdit);
-        Stage stage = (Stage) btnSave.getScene().getWindow();
-        stage.close();
+        
+        String partId = txtID.getText();
+        String name = txtName.getText();
+        String min = txtMin.getText();
+        String company = txtCompanyName.getText();
+        String price = txtPrice.getText();
+        String inv = txtInv.getText();
+        String max = txtMax.getText();
+
+        //validate edited part
+        String message = inventory.isPartValid(name, price, inv, min, max, company);
+        if (message.length() == 0) {
+            if (bOutsourced == false) {
+//                partOutSourced newPart = new partOutSourced();
+                partEdit.setPartId(Integer.parseInt(partId));
+                partEdit.setName(name);
+                partEdit.setMax(Integer.parseInt(max));
+                partEdit.setMin(Integer.parseInt(min));
+                partEdit.setInv(Integer.parseInt(inv));
+                partEdit.setPrice(Double.parseDouble(price));
+                partEdit.setCompany(company);
+                inventory.updatePart(partIndex, partEdit);
+            } else {
+//                partEdit newPart = new partInHouse();
+                partEdit.setPartId(Integer.parseInt(partId));
+                partEdit.setName(name);
+                partEdit.setMax(Integer.parseInt(max));
+                partEdit.setMin(Integer.parseInt(min));
+                partEdit.setInv(Integer.parseInt(inv));
+                partEdit.setPrice(Double.parseDouble(price));
+                partEdit.setCompany(company);
+                inventory.updatePart(partIndex, partEdit);
+            }
+            Stage stage = (Stage) btnSave.getScene().getWindow();
+            stage.close();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText(message);
+            alert.showAndWait();
+        }
     }
 
     @FXML
     private void handleInHouse(ActionEvent event) {
+        bOutsourced = false;
+        rdoOutsourced.setSelected(false);
     }
 
     @FXML
     private void handleOutsourced(ActionEvent event) {
+        bOutsourced = false;
+        rdoOutsourced.setSelected(false);
     }
 
 }

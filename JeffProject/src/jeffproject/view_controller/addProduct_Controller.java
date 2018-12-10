@@ -109,19 +109,37 @@ public class addProduct_Controller implements Initializable {
 
     @FXML
     private void handleSave(ActionEvent event) {
+        
+//        todo update per addPart_controller
+        
+        int max = Integer.parseInt(txtMax.getText());
+        int inv = Integer.parseInt(txtInv.getText());
+        double price = Double.parseDouble(txtPrice.getText());
+        int min = Integer.parseInt(txtMin.getText());
+        String name = txtName.getText();
+        int id = Integer.parseInt(txtID.getText());
+        
+        //validate new product
+        if (inventory.isProductValid(name, price, inv, min, max, partStock, message) == true) {
+            product newProd = new product();
+            newProd.setMax(max);
+            newProd.setInStock(inv);
+            newProd.setPrice(price);
+            newProd.setMin(min);
+            newProd.setName(name);
+            newProd.setProductID(id);
+            newProd.setParts(partStock);
+            inventory.productAdd(newProd);
 
-        product newProd = new product();
-        newProd.setMax(Integer.parseInt(txtMax.getText()));
-        newProd.setInStock(Integer.parseInt(txtInv.getText()));
-        newProd.setPrice(Double.parseDouble(txtPrice.getText()));
-        newProd.setMin(Integer.parseInt(txtMin.getText()));
-        newProd.setName(txtName.getText());
-        newProd.setProductID(Integer.parseInt(txtID.getText()));
-        newProd.setParts(partStock);
-        inventory.productAdd(newProd);
-
-        Stage stage = (Stage) txtSave.getScene().getWindow();
-        stage.close();
+            Stage stage = (Stage) txtSave.getScene().getWindow();
+            stage.close();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText(message);
+            alert.showAndWait();     
+        }
     }
 
     @FXML
