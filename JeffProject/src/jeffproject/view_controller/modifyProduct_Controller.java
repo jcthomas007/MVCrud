@@ -124,25 +124,36 @@ public class modifyProduct_Controller implements Initializable {
 
     @FXML
     private void handleSaveAction(ActionEvent event) {
-        
-        //        todo update per modifyPart_controller
-        
-        
-        productEdit.setProductID(Integer.parseInt(txtID.getText()));
-        productEdit.setName(txtName.getText());
-        productEdit.setMin(Integer.parseInt(txtMin.getText()));
-        productEdit.setPrice(Double.parseDouble(txtPrice.getText()));
-        productEdit.setInStock(Integer.parseInt(txtInv.getText()));
-        productEdit.setMax(Integer.parseInt(txtMax.getText()));
+        String productId = txtID.getText();
+        String name = txtName.getText();
+        String min = txtMin.getText();
+        String price = txtPrice.getText();
+        String inv = txtInv.getText();
+        String max = txtMax.getText();
 
-        inventory.updatePart(productIndex, productEdit);
-        Stage stage = (Stage) btnSave.getScene().getWindow();
-        stage.close();
+        //validate edited product
+        String message = inventory.isProductValid(name, price, inv, min, max, productParts);
+        if (message.length() == 0) {
+            productEdit.setProductID(Integer.parseInt(productId));
+            productEdit.setName(name);
+            productEdit.setMin(Integer.parseInt(min));
+            productEdit.setPrice(Double.parseDouble(price));
+            productEdit.setInStock(Integer.parseInt(inv));
+            productEdit.setMax(Integer.parseInt(max));
+
+            inventory.updateProduct(productIndex, productEdit);
+            Stage stage = (Stage) btnSave.getScene().getWindow();
+            stage.close();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setContentText(message);
+            alert.showAndWait();
+        }
     }
 
     @FXML
-    private void handleSearch(ActionEvent event
-    ) {
+    private void handleSearch(ActionEvent event) {
         Integer iIndex = inventory.productLookup(txtSearch.getText());
         if (iIndex > -1) {
             grdSearch.requestFocus();

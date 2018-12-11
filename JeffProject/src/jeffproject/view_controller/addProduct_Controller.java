@@ -109,25 +109,23 @@ public class addProduct_Controller implements Initializable {
 
     @FXML
     private void handleSave(ActionEvent event) {
-        
-//        todo update per addPart_controller
-        
-        int max = Integer.parseInt(txtMax.getText());
-        int inv = Integer.parseInt(txtInv.getText());
-        double price = Double.parseDouble(txtPrice.getText());
-        int min = Integer.parseInt(txtMin.getText());
+        String max = txtMax.getText();
+        String inv = txtInv.getText();
+        String price = txtPrice.getText();
+        String min = txtMin.getText();
         String name = txtName.getText();
-        int id = Integer.parseInt(txtID.getText());
+        String id = txtID.getText();
         
         //validate new product
-        if (inventory.isProductValid(name, price, inv, min, max, partStock, message) == true) {
+        String message = inventory.isProductValid(name, price, inv, min, max, partStock);
+        if (message.length() == 0) {
             product newProd = new product();
-            newProd.setMax(max);
-            newProd.setInStock(inv);
-            newProd.setPrice(price);
-            newProd.setMin(min);
+            newProd.setMax(Integer.parseInt(max));
+            newProd.setInStock(Integer.parseInt(inv));
+            newProd.setPrice(Double.parseDouble(price));
+            newProd.setMin(Integer.parseInt(min));
             newProd.setName(name);
-            newProd.setProductID(id);
+            newProd.setProductID(Integer.parseInt(id));
             newProd.setParts(partStock);
             inventory.productAdd(newProd);
 

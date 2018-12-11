@@ -52,7 +52,7 @@ public class inventory {
         productStock.remove(product);
     }
 
-    public static void updatePart(int productId, product product) {
+    public static void updateProduct(int productId, product product) {
         productStock.set(productId, product);
     }
 
@@ -264,7 +264,7 @@ public class inventory {
             for (int x = 0; x < parts.size(); x++) {
                 partTotal = partTotal + parts.get(x).getPrice().doubleValue();
             }
-            if (partTotal < Double.parseDouble(price)) {
+            if (partTotal > Double.parseDouble(price)) {
                 message = message + System.lineSeparator()
                         + "Product price must be greater than the price of its parts.";
             }
