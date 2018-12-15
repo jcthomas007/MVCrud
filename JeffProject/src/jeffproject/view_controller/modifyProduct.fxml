@@ -16,18 +16,18 @@
       <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
       <TableView fx:id="grdSearch" layoutX="428.0" layoutY="133.0" prefHeight="200.0" prefWidth="470.0">
          <columns>
-            <TableColumn fx:id="colSearchPartID" prefWidth="75.0" text="Part ID" />
-            <TableColumn fx:id="colSearchName" prefWidth="75.0" text="Part Name" />
-            <TableColumn fx:id="colSearchInventory" prefWidth="75.0" text="Inventory Level" />
-            <TableColumn fx:id="colSearchPrice" prefWidth="75.0" text="Price per Unit" />
+            <TableColumn fx:id="colSearchPartID" maxWidth="117.0" minWidth="117.0" prefWidth="117.0" resizable="false" text="Part ID" />
+            <TableColumn fx:id="colSearchName" maxWidth="117.0" minWidth="117.0" prefWidth="117.0" resizable="false" text="Part Name" />
+            <TableColumn fx:id="colSearchInventory" maxWidth="117.0" minWidth="117.0" prefWidth="117.0" resizable="false" text="Inventory Level" />
+            <TableColumn fx:id="colSearchPrice" maxWidth="117.0" minWidth="117.0" prefWidth="117.0" resizable="false" text="Price per Unit" />
          </columns>
       </TableView>
       <TableView fx:id="grdEdit" layoutX="428.0" layoutY="428.0" prefHeight="200.0" prefWidth="470.0">
          <columns>
-            <TableColumn fx:id="colEditPartID" prefWidth="75.0" text="Part ID" />
-            <TableColumn fx:id="colEditName" prefWidth="75.0" text="Part Name" />
-            <TableColumn fx:id="colEditInventory" prefWidth="75.0" text="Inventory Level" />
-            <TableColumn fx:id="colEditPrice" prefWidth="75.0" text="Price per Unit" />
+            <TableColumn fx:id="colEditPartID" maxWidth="117.0" minWidth="117.0" prefWidth="117.0" resizable="false" text="Part ID" />
+            <TableColumn fx:id="colEditName" maxWidth="117.0" minWidth="117.0" prefWidth="117.0" resizable="false" text="Part Name" />
+            <TableColumn fx:id="colEditInventory" maxWidth="117.0" minWidth="117.0" prefWidth="117.0" resizable="false" text="Inventory Level" />
+            <TableColumn fx:id="colEditPrice" maxWidth="117.0" minWidth="117.0" prefWidth="117.0" resizable="false" text="Price per Unit" />
          </columns>
       </TableView>
       <Button fx:id="btnSave" layoutX="746.0" layoutY="681.0" onAction="#handleSaveAction" prefHeight="27.0" prefWidth="69.0" text="Save" />

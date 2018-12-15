@@ -35,6 +35,8 @@ public class modifyPart_Controller implements Initializable {
     @FXML
     private Label label;
     @FXML
+    private Label lblCompanyName;
+    @FXML
     private Button btnSave;
     @FXML
     private RadioButton rdoInHouse;
@@ -68,15 +70,21 @@ public class modifyPart_Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         partIndex = main_Controller.partId;
         partEdit = inventory.getParts().get(partIndex);
-        //rdoInHouse = parts(partId).;
-        //rdoOutsourced;
         txtID.setText((Integer.toString(partEdit.getPartId().getValue())));
         txtName.setText(partEdit.getName().getValue());
         txtMin.setText(Integer.toString(partEdit.getMin().getValue()));
-        txtCompanyName.setText(partEdit.getCompany().getValue());
         txtPrice.setText(Double.toString(partEdit.getPrice().getValue()));
         txtInv.setText(Integer.toString(partEdit.getInv().getValue()));
         txtMax.setText(Integer.toString(partEdit.getMax().getValue()));
+        inHouse(partEdit instanceof partInHouse);
+
+        if (bOutsourced == false) {
+            txtCompanyName.setText(Integer.toString((((partInHouse) 
+                    inventory.getParts().get(partIndex)).getMachineId())));
+        } else {
+            txtCompanyName.setText((((partOutSourced) 
+                    inventory.getParts().get(partIndex)).getCompany().getValue()));
+        }
     }
 
     @FXML
@@ -89,7 +97,7 @@ public class modifyPart_Controller implements Initializable {
 
     @FXML
     private void handleSave(ActionEvent event) {
-        
+
         String partId = txtID.getText();
         String name = txtName.getText();
         String min = txtMin.getText();
@@ -99,10 +107,10 @@ public class modifyPart_Controller implements Initializable {
         String max = txtMax.getText();
 
         //validate edited part
-        String message = inventory.isPartValid(name, price, inv, min, max, company);
+        String message = inventory.isPartValid(name, price, inv, min, max, company, bOutsourced);
         if (message.length() == 0) {
             if (bOutsourced == false) {
-//                partOutSourced newPart = new partOutSourced();
+                partOutSourced partEdit = new partOutSourced();
                 partEdit.setPartId(Integer.parseInt(partId));
                 partEdit.setName(name);
                 partEdit.setMax(Integer.parseInt(max));
@@ -112,14 +120,14 @@ public class modifyPart_Controller implements Initializable {
                 partEdit.setCompany(company);
                 inventory.updatePart(partIndex, partEdit);
             } else {
-//                partEdit newPart = new partInHouse();
+                partInHouse partEdit = new partInHouse();
                 partEdit.setPartId(Integer.parseInt(partId));
                 partEdit.setName(name);
                 partEdit.setMax(Integer.parseInt(max));
                 partEdit.setMin(Integer.parseInt(min));
                 partEdit.setInv(Integer.parseInt(inv));
                 partEdit.setPrice(Double.parseDouble(price));
-                partEdit.setCompany(company);
+                partEdit.setMachineId(Integer.parseInt(company));
                 inventory.updatePart(partIndex, partEdit);
             }
             Stage stage = (Stage) btnSave.getScene().getWindow();
@@ -133,15 +141,30 @@ public class modifyPart_Controller implements Initializable {
     }
 
     @FXML
-    private void handleInHouse(ActionEvent event) {
-        bOutsourced = false;
-        rdoOutsourced.setSelected(false);
+    private void inhouseHandler(ActionEvent event) {
+        inHouse(true);
     }
 
     @FXML
-    private void handleOutsourced(ActionEvent event) {
-        bOutsourced = false;
-        rdoOutsourced.setSelected(false);
+    private void outsourceHandler(ActionEvent event) {
+        inHouse(false);
+    }
+
+    private void inHouse(Boolean inHouse) {
+        if (inHouse == true) {
+            bOutsourced = false;
+            rdoOutsourced.setSelected(false);
+            rdoInHouse.setSelected(true);
+            lblCompanyName.setText("Machine ID");
+            txtCompanyName.setText("");
+        } else {
+            bOutsourced = true;
+            rdoOutsourced.setSelected(true);
+            rdoInHouse.setSelected(false);
+            lblCompanyName.setText("Company Name");
+            txtCompanyName.setText("");
+        }
+
     }
 
 }

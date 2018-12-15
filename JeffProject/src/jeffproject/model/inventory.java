@@ -34,11 +34,10 @@ public class inventory {
         partStock.set(partId, part);
     }
 
-    public int partCount() {
+    public static int partCount() {
         return partStock.size() + 1;
     }
 
-    // todo search part
     // product
     public static ObservableList<product> getProducts() {
         return productStock;
@@ -100,7 +99,7 @@ public class inventory {
 
     //Verification
     public static String isPartValid(String name, String price, String inv, String min,
-            String max, String company) {
+            String max, String company, Boolean outsourced) {
 
         boolean validMinMax = true;
         String message = "";
@@ -172,10 +171,12 @@ public class inventory {
             }
         }
 
-        //Company is required
-        if (company.length() == 0) {
-            message = message + System.lineSeparator()
-                    + "Company name is required.";
+        //Company is required if outsourced
+        if (outsourced == true) {
+            if (company.length() == 0) {
+                message = message + System.lineSeparator()
+                        + "Company name is required.";
+            }
         }
 
         return message;

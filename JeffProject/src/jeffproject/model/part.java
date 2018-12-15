@@ -14,24 +14,23 @@ import javafx.beans.property.StringProperty;
  * @author jeffreyt
  */
 public abstract class part {
+
     private IntegerProperty partId;
     private StringProperty name;
     private DoubleProperty price;
     private IntegerProperty inv;
     private IntegerProperty min;
     private IntegerProperty max;
-    private StringProperty company;
-    
-    public part(){
+
+    public part() {
         partId = new SimpleIntegerProperty();
         name = new SimpleStringProperty();
         price = new SimpleDoubleProperty();
         inv = new SimpleIntegerProperty();
         min = new SimpleIntegerProperty();
         max = new SimpleIntegerProperty();
-        company = new SimpleStringProperty();
     }
-    
+
     //Get
     public IntegerProperty getPartId() {
         return this.partId;
@@ -56,37 +55,30 @@ public abstract class part {
     public IntegerProperty getMax() {
         return this.max;
     }
-    
-    public StringProperty getCompany() {
-        return this.company;
-    }
-    
+
     //Set
-    public void setPartId( int partId) {
+    public void setPartId(int partId) {
         this.partId.set(partId);
     }
 
-    public void setName( String name ) {
+    public void setName(String name) {
         this.name.set(name);
     }
 
-    public void setPrice( double price ) {
+    public void setPrice(double price) {
         this.price.set(price);
     }
 
-    public void setInv( int inv) {
+    public void setInv(int inv) {
         this.inv.set(inv);
     }
 
-    public void setMin( int min ) {
+    public void setMin(int min) {
         this.min.set(min);
     }
 
-    public void setMax( int max ) {
+    public void setMax(int max) {
         this.max.set(max);
     }
-    
-    public void setCompany( String company ) {
-        this.company.set(company);
-    }
+
 }

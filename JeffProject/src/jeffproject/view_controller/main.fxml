@@ -19,10 +19,10 @@
             <TextField fx:id="txtPartSearch" layoutX="254.0" layoutY="18.0" prefHeight="27.0" prefWidth="227.0" />
             <TableView fx:id="grdPart" layoutX="14.0" layoutY="52.0" prefHeight="248.0" prefWidth="470.0">
               <columns>
-                <TableColumn fx:id="colPartID" prefWidth="75.0" text="Part ID" />
-                <TableColumn fx:id="colPartName" prefWidth="75.0" text="Part Name" />
-                  <TableColumn fx:id="colPartInventoryLevel" prefWidth="75.0" text="Inventory Level" />
-                  <TableColumn fx:id="colPartPrice" prefWidth="75.0" text="Price/Cost per Unit" />
+                <TableColumn fx:id="colPartID" maxWidth="117.0" minWidth="117.0" prefWidth="117.0" resizable="false" text="Part ID" />
+                <TableColumn fx:id="colPartName" maxWidth="117.0" minWidth="117.0" prefWidth="117.0" resizable="false" text="Part Name" />
+                  <TableColumn fx:id="colPartInventoryLevel" maxWidth="117.0" minWidth="117.0" prefWidth="117.0" resizable="false" text="Inventory Level" />
+                  <TableColumn fx:id="colPartPrice" maxWidth="117.0" minWidth="117.0" prefWidth="117.0" resizable="false" text="Price/Cost per Unit" />
               </columns>
             </TableView>
             <Button fx:id="btnPartDelete" layoutX="422.0" layoutY="316.0" mnemonicParsing="false" onAction="#handlePartDelete" text="Delete" />
@@ -37,10 +37,10 @@
             <TextField fx:id="txtProductSearch" layoutX="254.0" layoutY="18.0" prefHeight="27.0" prefWidth="227.0" />
             <TableView fx:id="grdProduct" layoutX="14.0" layoutY="52.0" prefHeight="248.0" prefWidth="470.0">
                <columns>
-                  <TableColumn fx:id="colProductID" prefWidth="75.0" text="Product ID" />
-                  <TableColumn fx:id="colProductName" prefWidth="75.0" text="Product Name" />
-                  <TableColumn fx:id="colProductInventoryLevel" prefWidth="75.0" text="Inventory Level" />
-                  <TableColumn fx:id="colProductPrice" prefWidth="75.0" text="Price per Unit" />
+                  <TableColumn fx:id="colProductID" maxWidth="117.0" minWidth="117.0" prefWidth="117.0" resizable="false" text="Product ID" />
+                  <TableColumn fx:id="colProductName" maxWidth="117.0" minWidth="117.0" prefWidth="117.0" resizable="false" text="Product Name" />
+                  <TableColumn fx:id="colProductInventoryLevel" maxWidth="117.0" minWidth="117.0" prefWidth="117.0" resizable="false" text="Inventory Level" />
+                  <TableColumn fx:id="colProductPrice" maxWidth="117.0" minWidth="117.0" prefWidth="117.0" resizable="false" text="Price per Unit" />
                </columns>
             </TableView>
             <Button fx:id="btnProductDelete" layoutX="422.0" layoutY="316.0" mnemonicParsing="false" onAction="#handleProductDelete" text="Delete" />

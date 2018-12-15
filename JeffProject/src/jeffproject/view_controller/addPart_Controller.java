@@ -37,6 +37,8 @@ public class addPart_Controller implements Initializable {
     @FXML
     private Label label;
     @FXML
+    private Label lblCompanyName;
+    @FXML
     private Button btnSave;
     @FXML
     private RadioButton rbtnInHouse;
@@ -80,7 +82,7 @@ public class addPart_Controller implements Initializable {
         String max = txtMax.getText();
 
         //validate new part
-        String message = inventory.isPartValid(name, price, inv, min, max, company);
+        String message = inventory.isPartValid(name, price, inv, min, max, company, bOutsourced);
         if (message.length() == 0) {
             if (bOutsourced == false) {
                 partOutSourced newPart = new partOutSourced();
@@ -100,7 +102,7 @@ public class addPart_Controller implements Initializable {
                 newPart.setMin(Integer.parseInt(min));
                 newPart.setInv(Integer.parseInt(inv));
                 newPart.setPrice(Double.parseDouble(price));
-                newPart.setCompany(company);
+                newPart.setMachineId(Integer.parseInt(company));
                 inventory.partAdd(newPart);
             }
             Stage stage = (Stage) btnSave.getScene().getWindow();
@@ -114,18 +116,24 @@ public class addPart_Controller implements Initializable {
     }
 
     @FXML
-    private void inHouseHandler(ActionEvent event) {
+    private void inhouseHandler(ActionEvent event) {
         bOutsourced = false;
         rbtnOutsourced.setSelected(false);
+        rbtnInHouse.setSelected(true);
+        lblCompanyName.setText("Machine ID");
+        txtCompanyName.setText("");
     }
 
     @FXML
-    private void outsourcedHandler(ActionEvent event) {
+    private void outsourceHandler(ActionEvent event) {
         bOutsourced = true;
+        rbtnOutsourced.setSelected(true);
         rbtnInHouse.setSelected(false);
+        lblCompanyName.setText("Company Name");
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        txtID.setText(Integer.toString(inventory.partCount()));
     }
 }
