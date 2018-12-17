@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="JThomas334_C482_Project.jnlp">
+  <information>
+    <title>JThomas334_C482_Project</title>
+    <vendor>jeffreyt</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="JThomas334_C482_Project.jar" size="30279" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="JThomas334_C482_Project" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="jeffproject.JeffProject"  name="JThomas334_C482_Project" />
+  <update check="always"/>
+</jnlp>

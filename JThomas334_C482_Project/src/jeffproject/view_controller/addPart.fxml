@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import searchtableview.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="379.0" prefWidth="402.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeffproject.view_controller.addPart_Controller">
+   <children>
+      <RadioButton fx:id="rbtnInHouse" layoutX="119.0" layoutY="23.0" mnemonicParsing="false" onAction="#inhouseHandler" text="In-House">
+         <toggleGroup>
+            <ToggleGroup fx:id="RadioButtons" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="rbtnOutsourced" layoutX="273.0" layoutY="23.0" mnemonicParsing="false" onAction="#outsourceHandler" selected="true" text="Outsourced" toggleGroup="$RadioButtons" />
+      <TextField fx:id="txtID" editable="false" layoutX="119.0" layoutY="80.0" opacity="0.35" prefHeight="27.0" prefWidth="260.0" />
+      <TextField fx:id="txtName" layoutX="119.0" layoutY="120.0" prefHeight="27.0" prefWidth="260.0" />
+      <TextField fx:id="txtInv" layoutX="119.0" layoutY="160.0" prefHeight="27.0" prefWidth="260.0" />
+      <TextField fx:id="txtPrice" layoutX="119.0" layoutY="200.0" prefHeight="27.0" prefWidth="260.0" />
+      <TextField fx:id="txtMin" layoutX="119.0" layoutY="240.0" prefHeight="27.0" prefWidth="98.0" />
+      <TextField fx:id="txtMax" layoutX="283.0" layoutY="240.0" prefHeight="27.0" prefWidth="98.0" />
+      <TextField fx:id="txtCompanyName" layoutX="119.0" layoutY="280.0" prefHeight="27.0" prefWidth="260.0" />
+      <Button fx:id="btnSave" layoutX="215.0" layoutY="330.0" onAction="#saveHandler" prefHeight="27.0" prefWidth="69.0" text="Save" />
+      <Button fx:id="btnCancel" layoutX="304.0" layoutY="330.0" onAction="#cancelHandler" prefHeight="27.0" prefWidth="69.0" text="Cancel" />
+      <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
+      <Label layoutX="27.0" layoutY="23.0" text="Add Part" textFill="#136cbf" />
+      <Label layoutX="16.0" layoutY="80.0" text="ID" />
+      <Label layoutX="16.0" layoutY="120.0" text="Name" />
+      <Label layoutX="16.0" layoutY="200.0" text="Price/Cost" />
+      <Label layoutX="16.0" layoutY="240.0" text="Min" />
+      <Label layoutX="16.0" layoutY="160.0" text="Inv" />
+      <Label fx:id="lblCompanyName" layoutX="16.0" layoutY="280.0" text="Company Name" />
+      <Label layoutX="249.0" layoutY="240.0" text="Max" />
+   </children>
+</AnchorPane>
