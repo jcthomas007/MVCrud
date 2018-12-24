@@ -84,6 +84,7 @@ public class addProduct_Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        txtID.setText(Integer.toString(inventory.newProductId()));
         colFindPartID.setCellValueFactory(cellData -> cellData.getValue().getPartId().asObject());
         colFindPartName.setCellValueFactory(cellData -> cellData.getValue().getName());
         colFindPricePerUnit.setCellValueFactory(cellData -> cellData.getValue().getPrice().asObject());

@@ -131,6 +131,6 @@ public class addPart_Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        txtID.setText(Integer.toString(inventory.partCount()));
+        txtID.setText(Integer.toString(inventory.newPartId()));
     }
 }

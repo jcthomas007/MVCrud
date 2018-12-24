@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Users/jeffreyt/Dev/MVCrud/JThomas334_C482_Project/src/jeffproject/model/part.java</file>
             <file>file:/Users/jeffreyt/Dev/MVCrud/JThomas334_C482_Project/src/jeffproject/view_controller/addProduct_Controller.java</file>
             <file>file:/Users/jeffreyt/Dev/MVCrud/JThomas334_C482_Project/src/jeffproject/view_controller/addPart_Controller.java</file>
             <file>file:/Users/jeffreyt/Dev/MVCrud/JThomas334_C482_Project/src/jeffproject/view_controller/modifyProduct_Controller.java</file>
+            <file>file:/Users/jeffreyt/Dev/MVCrud/JThomas334_C482_Project/src/jeffproject/model/inventory.java</file>
+            <file>file:/Users/jeffreyt/Dev/MVCrud/JThomas334_C482_Project/src/jeffproject/model/partInHouse.java</file>
             <file>file:/Users/jeffreyt/Dev/MVCrud/JThomas334_C482_Project/src/jeffproject/view_controller/modifyPart_Controller.java</file>
             <file>file:/Users/jeffreyt/Dev/MVCrud/JThomas334_C482_Project/src/jeffproject/view_controller/main_Controller.java</file>
             <file>file:/Users/jeffreyt/Dev/MVCrud/JThomas334_C482_Project/src/jeffproject/model/partOutSourced.java</file>

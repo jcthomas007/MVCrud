@@ -40,7 +40,7 @@
       <TextField fx:id="txtPrice" layoutX="129.0" layoutY="210.0" prefHeight="27.0" prefWidth="100.0" />
       <TextField fx:id="txtMin" layoutX="129.0" layoutY="250.0" prefHeight="27.0" prefWidth="100.0" />
       <TextField fx:id="txtName" layoutX="129.0" layoutY="130.0" prefHeight="27.0" prefWidth="100.0" />
-      <TextField fx:id="txtID" layoutX="129.0" layoutY="90.0" prefHeight="27.0" prefWidth="260.0" />
+      <TextField fx:id="txtID" editable="false" layoutX="129.0" layoutY="90.0" opacity="0.35" prefHeight="27.0" prefWidth="260.0" />
       <Label layoutX="26.0" layoutY="170.0" text="Inv" />
       <Label layoutX="26.0" layoutY="250.0" text="Min" />
       <Label layoutX="26.0" layoutY="210.0" text="Price" />

@@ -16,6 +16,8 @@ public class inventory {
 
     private static ObservableList<part> partStock = FXCollections.observableArrayList();
     private static ObservableList<product> productStock = FXCollections.observableArrayList();
+    private static int partId = 0;
+    private static int productId = 0;
 
     //part
     public static ObservableList<part> getParts() {
@@ -87,6 +89,17 @@ public class inventory {
 
         }
         return -1;
+    }
+
+    //id's
+    public static int newPartId() {
+        partId = partId + 1;
+        return partId;
+    }
+
+    public static int newProductId() {
+        productId = productId + 1;
+        return productId;
     }
 
     private static boolean isInt(String sValue) {
